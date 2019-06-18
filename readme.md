@@ -21,3 +21,9 @@ Migration
 ```sh
 $ php artisan migrate
 ```
+
+Output GraphQL Schema
+
+```bash
+$ graphql get-schema laravel-graphql --output=schema.graphql
+```
