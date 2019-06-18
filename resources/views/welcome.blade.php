@@ -6,6 +6,9 @@
 
         <title>Laravel</title>
 
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script defer src="{{ mix('js/app.js') }}"></script>
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -83,6 +86,8 @@
                 <div class="title m-b-md">
                     Laravel
                 </div>
+
+                <div id="example"></div>
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
