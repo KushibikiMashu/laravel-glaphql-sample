@@ -4,9 +4,14 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 "A date string with format `Y-m-d`, e.g. `2011-05-23`."
 scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
+#type Query{
+#    posts: [Post!]! @all
+#    post (id: Int! @eq): Post @find
+#}
+
 type Query {
-    posts: [Post!]! @all
-    post(id: Int! @eq): Post @find
+    posts: [Post!]! @paginate
+    post (id: Int! @eq): Post @find
 }
 
 type User {
@@ -16,6 +21,7 @@ type User {
     created_at: DateTime!
     updated_at: DateTime!
     posts: [Post!]! @hasMany
+    password: String!
 }
 
 type Post {
@@ -24,10 +30,17 @@ type Post {
     content: String!
     user: User! @belongsTo
     comments: [Comment!]! @hasMany
+    user_id: Int!
 }
 
-type Comment {
+type Comment{
     id: ID!
     reply: String!
     post: Post! @belongsTo
+}
+
+type Mutation {
+    createUser(name: String!, email: String!, password: String!): User! @create
+    updateUser(id: ID!, name: String!): User! @update
+    deleteUser(id: ID!): User! @delete
 }
