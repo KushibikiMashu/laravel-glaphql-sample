@@ -6,41 +6,58 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 #type Query{
 #    posts: [Post!]! @all
+#    posts: [Post!]! @paginate
 #    post (id: Int! @eq): Post @find
 #}
 
-type Query {
-    posts: [Post!]! @paginate
-    post (id: Int! @eq): Post @find
-}
-
-type User {
-    id: ID!
-    name: String!
-    email: String!
-    created_at: DateTime!
-    updated_at: DateTime!
-    posts: [Post!]! @hasMany
-    password: String!
-}
-
-type Post {
-    id: ID!
-    title: String!
-    content: String!
-    user: User! @belongsTo
-    comments: [Comment!]! @hasMany
-    user_id: Int!
-}
-
-type Comment{
-    id: ID!
-    reply: String!
-    post: Post! @belongsTo
-}
+#type User {
+#    id: ID!
+#    name: String!
+#    email: String!
+#    created_at: DateTime!
+#    updated_at: DateTime!
+#    posts: [Post!]! @hasMany
+#}
+#
+#type Post {
+#    id: ID!
+#    title: String!
+#    content: String!
+#    user: User! @belongsTo
+#    comments: [Comment!]! @hasMany
+#}
+#
+#type Comment {
+#    id: ID!
+#    reply: String!
+#    post: Post! @belongsTo
+#}
 
 type Mutation {
     createUser(name: String!, email: String!, password: String!): User! @create
     updateUser(id: ID!, name: String!): User! @update
     deleteUser(id: ID!): User! @delete
 }
+
+# ----- 以下は実践的なサンプル ------
+# https://lighthouse-php.com/master/the-basics/fields.html#resolving-non-root-fields
+
+#type Query {
+#    hello: String
+#}
+
+# - 引数を設定する
+# - デフォルトの引数を設定する
+#type Query {
+#    greet(name: String = "you"): String
+#}
+
+type Query {
+    user: String!
+}
+
+#type User {
+#    id: ID!
+#    name: String!
+#    email: String
+#}
