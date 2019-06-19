@@ -9,6 +9,7 @@ type Query {
 #    posts: [Post!]! @paginate
     post (id: Int! @eq): Post @find
     users: [User!]! @all
+    usersPage: [User!]! @paginate
     user(id: Int! @eq): User @find
 }
 

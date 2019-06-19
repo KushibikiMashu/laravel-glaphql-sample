@@ -2,12 +2,14 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
-const query =gql`
+const query = gql`
     {
-        users(page: 3) {
-            id
-            name
-            email
+        usersPage(count: 3) {
+            data {
+                id
+                name
+                email
+            }
         }
     }
 `
@@ -18,7 +20,7 @@ const User = () => (
             if (loading) return <p>loading...</p>;
             if (error) return <p>Error :{error.toString()}</p>;
 
-            return data.users.map(({id, name, email}) => (
+            return data.usersPage.data.map(({id, name, email}) => (
                 <div key={id}>
                     <p>name: {name}</p>
                     <p>email: {email}</p>
