@@ -1,26 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import ApolloClient, {gql} from 'apollo-boost'
-import App from './App'
+import { ApolloProvider } from "react-apollo";
+import User from './User'
+import Error from "./Error";
 
 const client = new ApolloClient({
     uri: "http://127.0.0.1:8001/graphql"
 })
 
-client
-    .query({
-        query: gql`
-            {
-              users {
-                id
-                name
-                email
-              }
-            }
-        `
-    })
+const App = () => (
+    <ApolloProvider client={client}>
+        <User/>
+        <Error />
+    </ApolloProvider>
+)
 
-ReactDOM.render(
+render(
     <App />,
     document.getElementById('root')
 )
