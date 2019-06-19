@@ -8,6 +8,8 @@ type Query {
     posts: [Post!]! @all
 #    posts: [Post!]! @paginate
     post (id: Int! @eq): Post @find
+    users: [User!]! @all
+    user(id: Int! @eq): User @find
 }
 
 type User {
