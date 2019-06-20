@@ -26,6 +26,7 @@ const User = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [id, setId] = useState(0);
 
     return (
         <Query query={query}>
@@ -56,7 +57,14 @@ const User = () => {
                             variables={{name, email, password}}
                         >
                             {(createUser, {loading, error, data}) => (
-                                <button onClick={createUser}>Register</button>
+                                <>
+                                    <button onClick={createUser}>Register</button>
+                                    {data && <>
+                                        <p>ID: {data.createUser.id}</p>
+                                        <p>Name: {data.createUser.name}</p>
+                                    </>
+                                    }
+                                </>
                             )}
                         </Mutation>
                     </>
