@@ -4,12 +4,10 @@ import { gql } from 'apollo-boost';
 
 const query = gql`
     {
-        usersPage(count: 3) {
-            data {
-                id
-                name
-                email
-            }
+        users {
+            id
+            name
+            email
         }
     }
 `
@@ -37,15 +35,20 @@ const User = () => {
 
                 return (
                     <>
-                        {data.usersPage.data.map(({id, name, email}) => (
+                        <hr/>
+                        <h2>Users(all)</h2>
+                        {data.users.map(({id, name, email}) => (
                             <div key={id}>
                                 <p>name: {name}</p>
                                 <p>email: {email}</p>
                             </div>
                         ))}
+                        <hr/>
+                        <h2>Create</h2>
                         <div>
                             <p>name:{` `}<input type="text" onChange={e => setName(e.target.value)}/></p>
-                            <p>email:{` `}<input type="text" onChange={e => setEmail(e.target.value + '@gmail.com')}/>:@gmail.com</p>
+                            <p>email:{` `}<input type="text" onChange={e => setEmail(e.target.value + '@gmail.com')}/>:@gmail.com
+                            </p>
                             <p>password:{` `}<input type="text" onChange={e => setPassword(e.target.value)}/></p>
                         </div>
                         <Mutation
