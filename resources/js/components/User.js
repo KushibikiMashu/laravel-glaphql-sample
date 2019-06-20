@@ -88,7 +88,7 @@ const User = () => {
                         >
                             {(deleteUser, {loading, error, data}) => (
                                 <>
-                                    <input type="number" onChange={e => setId(e.target.value)}/>
+                                    <p>ID: <input type="number" onChange={e => setId(e.target.value)}/></p>
                                     <button onClick={deleteUser}>Delete</button>
                                     {data && <>
                                         <h3>Delete Success</h3>
