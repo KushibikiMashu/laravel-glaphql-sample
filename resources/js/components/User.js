@@ -4,10 +4,12 @@ import { gql } from 'apollo-boost';
 
 const query = gql`
     {
-        users {
-            id
-            name
-            email
+        usersPage(count: 5) {
+            data {
+                id
+                name
+                email
+            }
         }
     }
 `
@@ -48,7 +50,7 @@ const User = () => {
                     <>
                         <hr/>
                         <h2>User List</h2>
-                        {data.users.map(({id, name, email}) => (
+                        {data.usersPage.data.map(({id, name, email}) => (
                             <div key={id}>
                                 <p>name: {name}</p>
                                 <p>email: {email}</p>
