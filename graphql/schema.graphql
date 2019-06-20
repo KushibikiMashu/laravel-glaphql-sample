@@ -37,7 +37,7 @@ type Comment {
 }
 
 type Mutation {
-    createUser(name: String!, email: String!, password: String!): User! @create
+    createUser(name: String, email: String, password: String): User! @create
     updateUser(id: ID!, name: String!): User! @update
     deleteUser(id: ID!): User! @delete
 }
