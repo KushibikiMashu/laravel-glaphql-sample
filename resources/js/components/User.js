@@ -22,6 +22,16 @@ const CREATE_USER = gql`
     }
 `
 
+const DELETE_USER = gql`
+    mutation($id: ID!) {
+        deleteUser(id: $id) {
+            id
+            name
+            email
+        }
+    }
+`
+
 const User = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -37,7 +47,7 @@ const User = () => {
                 return (
                     <>
                         <hr/>
-                        <h2>Users(all)</h2>
+                        <h2>User List</h2>
                         {data.users.map(({id, name, email}) => (
                             <div key={id}>
                                 <p>name: {name}</p>
@@ -60,8 +70,27 @@ const User = () => {
                                 <>
                                     <button onClick={createUser}>Register</button>
                                     {data && <>
+                                        <h3>Success!</h3>
                                         <p>ID: {data.createUser.id}</p>
                                         <p>Name: {data.createUser.name}</p>
+                                    </>
+                                    }
+                                </>
+                            )}
+                        </Mutation>
+                        <hr/>
+                        <h2>Delete</h2>
+                        <Mutation
+                            mutation={DELETE_USER}
+                            variables={{id}}
+                        >
+                            {(deleteUser, {loading, error, data}) => (
+                                <>
+                                    <input type="number" onChange={e => setId(e.target.value)}/>
+                                    <button onClick={deleteUser}>Delete</button>
+                                    {data && <>
+                                        <h3>Delete Success</h3>
+                                        <p>ID: {data.deleteUser.id}</p>
                                     </>
                                     }
                                 </>
