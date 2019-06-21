@@ -23,9 +23,17 @@ const CREATE_USER = gql`
         }
     }
 `
+const UPDATE_USER = gql`
+    mutation UpdateUser($id: ID!, $name: String!) {
+        updateUser(id: $id, name: $name) {
+            id
+            name
+        }
+    }
+`
 
 const DELETE_USER = gql`
-    mutation($id: ID!) {
+    mutation ($id: ID!) {
         deleteUser(id: $id) {
             id
             name
@@ -38,7 +46,9 @@ const User = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [id, setId] = useState(0);
+    const [updateName, setUpdateName] = useState('');
+    const [updateId, setUpdateId] = useState(0);
+    const [deleteId, setDeleteId] = useState(0);
 
     return (
         <Query query={query}>
@@ -56,6 +66,7 @@ const User = () => {
                                 <p>email: {email}</p>
                             </div>
                         ))}
+
                         <hr/>
                         <h2>Create</h2>
                         <div>
@@ -70,7 +81,8 @@ const User = () => {
                         >
                             {(createUser, {loading, error, data}) => (
                                 <>
-                                    <button onClick={createUser}>Register</button>
+                                    <button type="button" onClick={createUser}>Register</button>
+                                    {error && <p>{error.toString()}</p>}
                                     {data && <>
                                         <h3>Success!</h3>
                                         <p>ID: {data.createUser.id}</p>
@@ -80,18 +92,41 @@ const User = () => {
                                 </>
                             )}
                         </Mutation>
+
+                        <hr/>
+                        <h2>Update</h2>
+                        <Mutation
+                            mutation={UPDATE_USER}
+                            variables={{id: updateId, name: updateName}}
+                        >
+                            {(updateUser, {loading, error, data}) => (
+                                <>
+                                    <p>ID: <input type="number" onChange={e => setUpdateId(e.target.value)}/></p>
+                                    <p>New Name: <input type="text" onChange={e => setUpdateName(e.target.value)}/></p>
+                                    <button type="button" onClick={updateUser}>Updte</button>
+                                    {error && <p>{error.toString()}</p>}
+                                    {data && <>
+                                        <h3>Success Update</h3>
+                                        <p>name: {data.updateUser.id}</p>
+                                    </>
+                                    }
+                                </>
+                            )}
+                        </Mutation>
+
                         <hr/>
                         <h2>Delete</h2>
                         <Mutation
                             mutation={DELETE_USER}
-                            variables={{id}}
+                            variables={{id: deleteId}}
                         >
                             {(deleteUser, {loading, error, data}) => (
                                 <>
-                                    <p>ID: <input type="number" onChange={e => setId(e.target.value)}/></p>
-                                    <button onClick={deleteUser}>Delete</button>
+                                    <p>ID: <input type="number" onChange={e => setDeleteId(e.target.value)}/></p>
+                                    <button type="button" onClick={deleteUser}>Delete</button>
+                                    {error && <p>{error.toString()}</p>}
                                     {data && <>
-                                        <h3>Delete Success</h3>
+                                        <h3>Success Delete</h3>
                                         <p>ID: {data.deleteUser.id}</p>
                                     </>
                                     }
