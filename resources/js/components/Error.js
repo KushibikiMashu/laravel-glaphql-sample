@@ -10,6 +10,7 @@ const query = gql`
 
 const Error = () => {
     const [isShown, toggle] = useState(false);
+    const display = isShown ? 'block' : 'none';
 
     return (
         <Query query={query}>
@@ -19,7 +20,7 @@ const Error = () => {
                     <div style={{margin: 60}}>
                         <hr/>
                         <button type="button" onClick={() => toggle(!isShown)}>Query Error Message</button>
-                        <div style={{display: isShown ? 'block' : 'none'}}>
+                        <div style={{display}}>
                             <h2>Error Message</h2>
                             <p>{error.toString()}</p>
                         </div>
