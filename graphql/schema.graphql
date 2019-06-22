@@ -6,11 +6,12 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 type Query {
     post (id: Int! @eq): Post @find
-#    posts: [Post!]! @paginate
+    postsPage: [Post!]! @paginate
     posts: [Post!]! @all
     user(id: ID! @eq): User @find
     users: [User!]! @all
     usersPage: [User!]! @paginate
+    usersOrderBy(orderBy: [OrderByClause!] @orderBy): [User!]! @all
 }
 
 type User {
