@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import ApolloClient, { gql } from 'apollo-boost'
+import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from "react-apollo";
 import User from './User'
 import Error from "./Error";
@@ -20,16 +20,16 @@ const client = new ApolloClient({
             console.log(`[Network error]: ${networkError}`);
         }
     }
-})
+});
 
 const App = () => (
     <ApolloProvider client={client}>
         <User/>
         <Error/>
     </ApolloProvider>
-)
+);
 
 render(
     <App/>,
     document.getElementById('root')
-)
+);
