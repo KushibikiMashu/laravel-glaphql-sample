@@ -4,6 +4,41 @@ import { gql } from 'apollo-boost';
 
 const ErrorMessage = (e) => <p>Error: {e.toString()}</p>;
 
+const query = gql`
+    {
+        usersPage(count: 5) {
+            data {
+                id
+                name
+                email
+            }
+        }
+    }
+`
+
+const UserQuery = () => (
+    <Query query={query}>
+        {({loading, error, data}) => {
+            if (loading) return <p>loading...</p>;
+            if (error) return <ErrorMessage e={error}/>;
+
+            return (
+                <>
+                    <hr/>
+                    <h2>User List</h2>
+                    {data.usersPage.data.map(({id, name, email}) => (
+                        <div key={id}>
+                            <p>id: {id}</p>
+                            <p>name: {name}</p>
+                            <p>email: {email}</p>
+                        </div>
+                    ))}
+                </>
+            );
+        }}
+    </Query>
+);
+
 const CREATE_USER = gql`
     mutation($name: String, $email: String, $password: String) {
         createUser (name: $name, email: $email, password: $password) {
@@ -122,49 +157,18 @@ const DeleteUser = () => {
             </Mutation>
         </>
     )
-}
-
-const query = gql`
-    {
-        usersPage(count: 5) {
-            data {
-                id
-                name
-                email
-            }
-        }
-    }
-`
+};
 
 const User = () => (
-    <>
-        <Query query={query}>
-            {({loading, error, data}) => {
-                if (loading) return <p>loading...</p>;
-                if (error) return <ErrorMessage e={error}/>;
-
-                return (
-                    <>
-                        <hr/>
-                        <h2>User List</h2>
-                        {data.usersPage.data.map(({id, name, email}) => (
-                            <div key={id}>
-                                <p>id: {id}</p>
-                                <p>name: {name}</p>
-                                <p>email: {email}</p>
-                            </div>
-                        ))}
-                    </>
-                );
-            }}
-        </Query>
+    <div>
+        <UserQuery />
         <hr/>
         <CreateUser/>
         <hr/>
         <UpdateUser/>
         <hr/>
         <DeleteUser/>
-    </>
+    </div>
 );
 
 export default User;
