@@ -6,7 +6,10 @@ const ErrorMessage = (e) => <p>Error: {e.toString()}</p>;
 
 const query = gql`
     {
-        usersPage(count: 5) {
+        usersOrderByWithPage(
+            orderBy: [{field: "id", order: DESC}]
+            count: 3
+        ) {
             data {
                 id
                 name
@@ -26,7 +29,7 @@ const UserQuery = () => (
                 <>
                     <hr/>
                     <h2>User List</h2>
-                    {data.usersPage.data.map(({id, name, email}) => (
+                    {data.usersOrderByWithPage.data.map(({id, name, email}) => (
                         <div key={id}>
                             <p>id: {id}</p>
                             <p>name: {name}</p>
