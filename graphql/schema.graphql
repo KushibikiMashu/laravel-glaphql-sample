@@ -12,6 +12,7 @@ type Query {
     users: [User!]! @all
     usersPage: [User!]! @paginate
     usersOrderBy(orderBy: [OrderByClause!] @orderBy): [User!]! @all
+    usersOrderByWithPage(orderBy: [OrderByClause!] @orderBy): [User!]! @paginate
 }
 
 type User {
