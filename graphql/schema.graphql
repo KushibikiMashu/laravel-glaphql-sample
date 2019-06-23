@@ -39,8 +39,8 @@ type Comment {
 }
 
 type Mutation {
-    createUser(name: String @rules (apply:["required", "min:3"]), email: String @rules(apply: ["required", "min:10"]), password: String @rules(apply: ["required", "min:2"])): User! @create
-    updateUser(id: ID!, name: String!): User! @update
+    createUser(name: String! @rules (apply: ["required", "min:3"]), email : String! @rules(apply: ["required", "min:10"]), password: String! @rules(apply: ["required", "min:2"])): User! @create
+    updateUser(id: ID!, name: String! @rules (apply: ["required", "min:3"])): User! @update
     deleteUser(id: ID!): User! @delete
 }
 
