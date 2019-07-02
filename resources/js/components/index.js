@@ -6,7 +6,7 @@ import User from './User'
 import Error from "./Error";
 
 const client = new ApolloClient({
-    uri: "http://127.0.0.1:8001/graphql",
+    uri: "http://127.0.0.1:8000/graphql",
     onError: ({graphQLErrors, networkError}) => {
         if (graphQLErrors) {
             graphQLErrors.map(({message, locations, path}) =>

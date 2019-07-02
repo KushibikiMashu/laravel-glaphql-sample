@@ -17,9 +17,8 @@ const Error = () => {
             {({loading, error, data}) => {
                 if (loading) return <p>Loading...</p>;
                 if (error) return (
-                    <div style={{margin: 60}}>
-                        <hr/>
-                        <button type="button" onClick={() => toggle(!isShown)}>Query Error Message</button>
+                    <div style={{marginLeft: 'auto', marginRight: 'auto', width: 300}}>
+                        <button type="button" onClick={() => toggle(!isShown)}>See Query Error</button>
                         <div style={{display}}>
                             <h2>Error Message</h2>
                             <p>{error.toString()}</p>

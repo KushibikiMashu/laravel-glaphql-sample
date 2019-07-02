@@ -27,10 +27,9 @@ const UserQuery = () => (
 
             return (
                 <>
-                    <hr/>
                     <h2>User List</h2>
                     {data.usersOrderByWithPage.data.map(({id, name, email}) => (
-                        <div key={id}>
+                        <div key={id} style={{textAlign: 'left'}}>
                             <p>id: {id}</p>
                             <p>name: {name}</p>
                             <p>email: {email}</p>
@@ -60,7 +59,7 @@ const CreateUser = () => {
     return (
         <>
             <h2>Create</h2>
-            <div>
+            <div style={{textAlign: 'left'}}>
                 <p>name:{` `}<input type="text" onChange={e => setName(e.target.value)}/></p>
                 <p>email:{` `}<input type="text" onChange={e => setEmail(e.target.value + '@gmail.com')}/>:@gmail.com
                 </p>
@@ -109,8 +108,10 @@ const UpdateUser = () => {
             >
                 {(updateUser, {loading, error, data}) => (
                     <>
-                        <p>ID: <input type="number" onChange={e => setId(e.target.value)}/></p>
-                        <p>New Name: <input type="text" onChange={e => setName(e.target.value)}/></p>
+                        <div style={{textAlign: 'left'}}>
+                            <p>ID: <input type="number" onChange={e => setId(e.target.value)}/></p>
+                            <p>New Name: <input type="text" onChange={e => setName(e.target.value)}/></p>
+                        </div>
                         <button type="button" onClick={updateUser}>Updte</button>
                         {error && <ErrorMessage e={error}/>}
                         {data && <>
@@ -147,8 +148,10 @@ const DeleteUser = () => {
             >
                 {(deleteUser, {loading, error, data}) => (
                     <>
-                        <p>ID: <input type="number" onChange={e => setId(e.target.value)}/></p>
-                        <button type="button" onClick={deleteUser}>Delete</button>
+                        <div style={{textAlign: 'left'}}>
+                            <p>ID: <input type="number" onChange={e => setId(e.target.value)}/></p>
+                            <button type="button" onClick={deleteUser}>Delete</button>
+                        </div>
                         {error && <ErrorMessage e={error}/>}
                         {data && <>
                             <h3>Success Delete</h3>
@@ -163,14 +166,19 @@ const DeleteUser = () => {
 };
 
 const User = () => (
-    <div>
-        <UserQuery />
-        <hr/>
-        <CreateUser/>
-        <hr/>
-        <UpdateUser/>
-        <hr/>
-        <DeleteUser/>
+    <div style={{display: 'flex'}}>
+        <div style={{marginLeft: 30, marginRight: 30,}}>
+            <UserQuery/>
+        </div>
+        <div style={{marginLeft: 30, marginRight: 30,}}>
+            <CreateUser/>
+        </div>
+        <div style={{marginLeft: 30, marginRight: 30,}}>
+            <UpdateUser/>
+        </div>
+        <div style={{marginLeft: 30, marginRight: 30,}}>
+            <DeleteUser/>
+        </div>
     </div>
 );
 
