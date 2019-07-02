@@ -74,7 +74,7 @@ const CreateUser = () => {
                         <button type="button" onClick={createUser}>Register</button>
                         {error && <ErrorMessage error={error}/>}
                         {data && <>
-                            <h3>Success!</h3>
+                            <h3>Success Create</h3>
                             <p>ID: {data.createUser.id}</p>
                             <p>Name: {data.createUser.name}</p>
                         </>
@@ -115,7 +115,7 @@ const UpdateUser = () => {
                         <button type="button" onClick={updateUser}>Updte</button>
                         {error && <ErrorMessage e={error}/>}
                         {data && <>
-                            <h3>Success Update</h3>
+                            <h3>Update Success</h3>
                             <p>name: {data.updateUser.id}</p>
                         </>
                         }
@@ -154,7 +154,7 @@ const DeleteUser = () => {
                         </div>
                         {error && <ErrorMessage e={error}/>}
                         {data && <>
-                            <h3>Success Delete</h3>
+                            <h3>Delete Success</h3>
                             <p>ID: {data.deleteUser.id}</p>
                         </>
                         }
