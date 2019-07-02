@@ -61,6 +61,10 @@
                 text-transform: uppercase;
             }
 
+            .m-t-md {
+                margin-top: 30px;
+            }
+
             .m-b-md {
                 margin-bottom: 30px;
             }
@@ -83,8 +87,8 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="title m-t-md m-b-md">
+                    Laravel GraphQL
                 </div>
                 <div id="root"></div>
             </div>
